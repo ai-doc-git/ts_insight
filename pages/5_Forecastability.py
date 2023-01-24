@@ -24,7 +24,7 @@ st.markdown("<h1 style='text-align: center; color: rgb(0, 0, 0);'> Forecastabili
 st.markdown('----')
 
 ############################################## Body ##############################################
-df_ad = st.session_state['my_data3']
+df_ad = st.session_state['my_data4']
 val_col = st.session_state['val_col']
 group_col = st.session_state['group_col']
 decomposed_result = st.session_state['decomposed_val']

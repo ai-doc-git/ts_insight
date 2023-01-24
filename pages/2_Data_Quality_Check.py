@@ -46,13 +46,16 @@ df = df.drop([group_col], axis=1)
 
 if (df.isnull().sum().values[0]/ len(df) * 100) > 0:
     st.error('Missing Value in data: ' + str(round(df.isnull().sum().values[0]/ len(df),2) * 100) + "%")
+else:
+    st.success('Missing Value in data: ' + str(round(df.isnull().sum().values[0]/ len(df),2) * 100) + "%")
     
 st.write('Missing Value Imputation:')
-ccol1, ccol2, ccol3 = st.columns(3)
+ccol1, ccol2, ccol3, ccol4 = st.columns(4)
 
 method1 = ccol1.checkbox('Fill with Zero')
 method2 = ccol2.checkbox('Forward Fill')
 method3 = ccol3.checkbox('Backward Fill')
+method4 = ccol4.checkbox('No Imputation')
 
 rcParams["figure.figsize"] = 7, 3
 # st.line_chart(data=df, x=None, height=300, y=val_col, use_container_width=True)
@@ -75,12 +78,14 @@ if method3:
     df_new = df_mod.copy()
     df_new['org'] = df[val_col]
     st.line_chart(data=df_new, x=None, height=300, use_container_width=True)
+if method4:
+    df_mod = df.copy()
 
 st.write('Original Dataframe:')
 st.dataframe(df.transpose(), use_container_width=True)
 st.write('Imputed Dataframe:')
 st.dataframe(df_mod.transpose(), use_container_width=True)
 df_next = df_mod.copy()
-save_data = st.checkbox('Save Data')
+save_data = st.button('Save Data')
 # if save_data and 'my_data3' not in st.session_state:
 st.session_state['my_data3'] = df_next

@@ -42,7 +42,7 @@ if group_col:
         dropdown_selected_value = group_dropdown
 
     df = df.loc[df[group_col] == dropdown_selected_value]
-_, col, _ = st.columns((5,1,5))
+_, col, _ = st.columns((4,1,4))
 clicked = col.button('Visualize Data', type='secondary')
 if clicked:
     df = df.loc[df[group_col] == dropdown_selected_value]
