@@ -172,6 +172,11 @@ if model_name == 'Auto-Arima':
     mcol2.metric("MAE", round(mae,2))
     mcol3.metric("MSE", round(mse,2))
     mcol4.metric("RMSE", round(rmse,2))
+    
+    st.markdown("----")
+    csv_data = f_data.to_csv().encode('utf-8')
+    st.download_button('Download Report', csv_data, file_name='export.csv', mime='text/csv')
+    
 elif model_name == 'Holt-Winter-Exponential Smoothing':
     st.write('Holt-Winter-Exponential Smoothing Model Selected.')
     data_tmp = df_fcst[[val_col]]
@@ -195,6 +200,9 @@ elif model_name == 'Holt-Winter-Exponential Smoothing':
     mcol3.metric("MSE", round(mse,2))
     mcol4.metric("RMSE", round(rmse,2))
     
+    st.markdown("----")
+    csv_data = f_data.to_csv().encode('utf-8')
+    st.download_button('Download Report', csv_data, file_name='export.csv', mime='text/csv')
     
 elif model_name == 'Auto-Reg':
     st.write('Auto-Reg Model Selected.')
@@ -219,5 +227,7 @@ elif model_name == 'Auto-Reg':
     mcol3.metric("MSE", round(mse,2))
     mcol4.metric("RMSE", round(rmse,2))              
                           
-                          
+    st.markdown("----")
+    csv_data = f_data.to_csv().encode('utf-8')
+    st.download_button('Download Report', csv_data, file_name='export.csv', mime='text/csv')                      
                           
