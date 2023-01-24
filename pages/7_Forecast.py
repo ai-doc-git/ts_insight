@@ -58,7 +58,7 @@ def auto_arima_modelling(data, train, test, val_col, fcst_horizon):
                           
 
 def auto_reg_modelling(data, train, test, val_col, fcst_horizon):                
-    params_grid = {'lags': [3, 7, 14, 21, 28, 31, [1,7,14,28,30,31]],
+    params_grid = {'lags': [3, 7, 14, 21, 28, 31, 365, [1,7,14,28,30,31, 365]],
                    'trend': ['n', 'c', 'ct', 't'],
                    'seasonal' : [True, False]}
     grid = hp_combination(params_grid)
