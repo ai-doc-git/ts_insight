@@ -19,6 +19,3 @@ streamlit-lottie==0.0.3
 tinycss2
 urllib3
 statsforecast==1.4.0
-numba==0.56.4
-llvmlite==0.39.1
-Cython==0.29.33
