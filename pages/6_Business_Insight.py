@@ -64,9 +64,9 @@ def color_survived(val):
     return f'background-color: {color}'
 
 st.markdown("<h5 style='text-align: left; color: rgb(0, 0, 0);'> Year on Year Growth </h5>", unsafe_allow_html=True)
-year_df = df_ad.groupby('year').agg({'Inflow':sum})
-year_df['lag'] = year_df.Inflow.shift(1)
-year_df['YoY growth'] = ((year_df.Inflow - year_df.lag) / year_df.lag) * 100
+year_df = df_ad.groupby('year').agg({val_col:sum})
+year_df['lag'] = year_df[val_col].shift(1)
+year_df['YoY growth'] = ((year_df[val_col] - year_df.lag) / year_df.lag) * 100
 year_df.dropna(inplace=True)
 # st.write(year_df)
 year_df['YoY growth'] = [int(item) for item in year_df['YoY growth']]
@@ -78,9 +78,9 @@ st.dataframe(y_out, use_container_width=True)
 st.bar_chart(year_output)
 
 st.markdown("<h5 style='text-align: left; color: rgb(0, 0, 0);'> Quarter on Quarter Growth </h5>", unsafe_allow_html=True)
-quarter_df = df_ad.groupby(['year','quarter']).agg({'Inflow':sum})
-quarter_df['lag'] = quarter_df.Inflow.shift(1)
-quarter_df['QoQ growth'] = ((quarter_df.Inflow - quarter_df.lag) / quarter_df.lag) * 100
+quarter_df = df_ad.groupby(['year','quarter']).agg({val_col:sum})
+quarter_df['lag'] = quarter_df[val_col].shift(1)
+quarter_df['QoQ growth'] = ((quarter_df[val_col] - quarter_df.lag) / quarter_df.lag) * 100
 quarter_df.dropna(inplace=True)
 quarter_df['QoQ growth'] = [int(item) for item in quarter_df['QoQ growth']]
 quarter_df2 = quarter_df[['QoQ growth']]
@@ -97,9 +97,9 @@ quarter_df3.index = index_list
 st.bar_chart(quarter_df3)
 
 st.markdown("<h5 style='text-align: left; color: rgb(0, 0, 0);'> Month on Month Growth </h5>", unsafe_allow_html=True)
-month_df = df_ad.groupby(['year','month']).agg({'Inflow':sum})
-month_df['lag'] = month_df.Inflow.shift(1)
-month_df['MoM growth'] = ((month_df.Inflow - month_df.lag) / month_df.lag) * 100
+month_df = df_ad.groupby(['year','month']).agg({val_col:sum})
+month_df['lag'] = month_df[val_col].shift(1)
+month_df['MoM growth'] = ((month_df[val_col] - month_df.lag) / month_df.lag) * 100
 month_df.dropna(inplace=True)
 month_df['MoM growth'] = [int(item) for item in month_df['MoM growth']]
 # month_df.fillna('na', inplace=True)

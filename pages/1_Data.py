@@ -45,7 +45,10 @@ if group_col:
 _, col, _ = st.columns((4,1,4))
 clicked = col.button('Visualize Data', type='secondary')
 if clicked:
-    df = df.loc[df[group_col] == dropdown_selected_value]
+    if group_col:
+        df = df.loc[df[group_col] == dropdown_selected_value]
+    else:
+        df = df.copy()
     df[date_col] = pd.to_datetime(df[date_col])
     df = df.sort_values(by=date_col)
     df = df.set_index([date_col])

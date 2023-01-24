@@ -40,9 +40,11 @@ df = st.session_state['my_data2']
 val_col = st.session_state['val_col']
 group_col = st.session_state['group_col']
 
-df = df.drop([group_col], axis=1)
-# st.dataframe(df)
-# st.write(df.isnull())
+
+if group_col:
+    df = df.drop([group_col], axis=1)
+
+df = df[[val_col]]
 
 if (df.isnull().sum().values[0]/ len(df) * 100) > 0:
     st.error('Missing Value in data: ' + str(round(df.isnull().sum().values[0]/ len(df),2) * 100) + "%")
