@@ -47,7 +47,7 @@ decomposed_result = st.session_state['decomposed_val']
 df_mu = df_ad[val_col].mean()
 df_std = df_ad[val_col].std()
 
-threshold = st.select_slider("Select a threshold:",['3', '3.5', '4', '4.5', '5'])
+threshold = st.select_slider("Select a threshold:",['3', '3.5', '4', '4.5', '5', '5.5', '6', '6.5', '7'])
 # st.markdown('----')
 
 st.line_chart(data=df_ad, x=None, height=200, y=val_col, use_container_width=True)
