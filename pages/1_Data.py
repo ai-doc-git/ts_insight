@@ -53,8 +53,8 @@ if clicked:
     df = df.sort_values(by=date_col)
     df = df.set_index([date_col])
     st.line_chart(data=df, x=None, height=300, y=val_col, use_container_width=True)
-    if 'my_data2' not in st.session_state:
-        st.session_state['my_data2'] = df
+#     if 'my_data2' not in st.session_state:
+    st.session_state['my_data2'] = df
         
     if 'val_col' not in st.session_state:
         st.session_state['val_col'] = val_col
