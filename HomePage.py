@@ -24,7 +24,7 @@ st.set_page_config(
     layout='wide'
 )
 
-st.sidebar.write('TS - INSIGHT')
+st.sidebar.write('NAVIGATION SIDEBAR')
 
 ############################################## Title ##############################################
 
