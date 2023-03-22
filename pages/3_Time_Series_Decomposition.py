@@ -13,7 +13,6 @@ import matplotlib.pyplot as plt
 from matplotlib import rcParams
 from PIL import Image
 
-from autots import AutoTS
 
 import warnings
 warnings.filterwarnings("ignore")

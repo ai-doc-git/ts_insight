@@ -17,14 +17,8 @@ from sklearn.metrics import mean_absolute_percentage_error, mean_absolute_error,
 from sklearn.model_selection import ParameterGrid
 from statsmodels.tsa.ar_model import AutoReg
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
-# from fbprophet import Prophet
 from statsforecast import StatsForecast
 from statsforecast.models import AutoARIMA
-# from skforecast.ForecasterAutoreg import ForecasterAutoreg
-# from skforecast.ForecasterAutoregCustom import ForecasterAutoregCustom 
-# from sklearn.ensemble import RandomForestRegressor
-# from skforecast. ForecasterAutoregMultiOutput import ForecasterAutoregMultioutput
-# from sklearn.pipeline import make_pipeline
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
