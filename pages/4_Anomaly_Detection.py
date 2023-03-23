@@ -1,21 +1,9 @@
+# Import python packages
 import numpy as np
 import pandas as pd
 import streamlit as st
-from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
-from statsmodels.tsa.seasonal import seasonal_decompose
-from statsmodels.tsa.stattools import adfuller
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
-import statsmodels.stats.diagnostic as diag
-from scipy.stats import kendalltau
-from streamlit_lottie import st_lottie
-import requests
-import matplotlib.pyplot as plt
-from matplotlib import rcParams
-from PIL import Image
 
-import warnings
-warnings.filterwarnings("ignore")
-
+# Outlier Handling methods
 def fix_mean(data, val_col, outliers):
     data1 = data.copy()
     data_mu = data1[val_col].mean()
@@ -30,12 +18,11 @@ def fix_median(data, val_col, outliers):
         data1.at[item[0], val_col] = data_mu
     return data1
 
-############################################## Title ##############################################
-
+# Title
 st.markdown("<h1 style='text-align: center; color: rgb(0, 0, 0);'> Anomaly Detection and Handling </h1>", unsafe_allow_html=True)
 st.markdown('----')
 
-############################################## Body ##############################################
+# Body
 df_ad = st.session_state['my_data3']
 val_col = st.session_state['val_col']
 group_col = st.session_state['group_col']
@@ -46,7 +33,6 @@ df_mu = df_ad[val_col].mean()
 df_std = df_ad[val_col].std()
 
 threshold = st.select_slider("Select a threshold:",['3', '3.5', '4', '4.5', '5', '5.5', '6', '6.5', '7'])
-# st.markdown('----')
 
 st.line_chart(data=df_ad, x=None, height=200, y=val_col, use_container_width=True)
 
@@ -95,12 +81,11 @@ if method2:
     df_new['org'] = df_ad[val_col]
     st.line_chart(data=df_new, x=None, height=300, use_container_width=True)
 if method3:
-    df_new = df_ad.copy()
+    df_mod = df_ad.copy()
     st.success('No Outliers found.')
-    st.line_chart(data=df_new, x=None, height=300, use_container_width=True)
+    st.line_chart(data=df_mod, x=None, height=300, use_container_width=True)
     
 save_data = st.button('Save Data')
-# if save_data and 'my_data3' not in st.session_state:
 df_ad_next = df_mod.copy()
 st.session_state['my_data4'] = df_ad_next
 

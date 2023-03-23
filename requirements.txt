@@ -1,4 +1,3 @@
-AutoTS==0.5.3
 beautifulsoup4
 matplotlib
 matplotlib-inline
@@ -18,4 +17,3 @@ streamlit-aggrid==0.3.3
 streamlit-lottie==0.0.3
 tinycss2
 urllib3
-statsforecast==1.4.0

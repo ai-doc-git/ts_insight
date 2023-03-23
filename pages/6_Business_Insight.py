@@ -1,22 +1,10 @@
+# Import python packages
 import numpy as np
 import pandas as pd
 import streamlit as st
-from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
-from statsmodels.tsa.seasonal import seasonal_decompose
-from statsmodels.tsa.stattools import adfuller
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
-import statsmodels.stats.diagnostic as diag
 from scipy.stats import kendalltau
-from streamlit_lottie import st_lottie
-import requests
-import matplotlib.pyplot as plt
-from matplotlib import rcParams
-from PIL import Image
 
-import warnings
-warnings.filterwarnings("ignore")
-
-
+# Method to find trend in data using Kendall's Tau
 def calculate_kendall_tau(data,col_name):
     """
     Function to check the trend of any given stock in last year
@@ -36,20 +24,16 @@ def calculate_kendall_tau(data,col_name):
         rst.error("Given time-series data has Strong Negative Trend")
 
 
-############################################## Title ##############################################
-
+# Title
 st.markdown("<h1 style='text-align: center; color: rgb(0, 0, 0);'> Business Insight </h1>", unsafe_allow_html=True)
 st.markdown('----')
 
-############################################## Body ##############################################
+# Body
 df_ad = st.session_state['my_data4']
 val_col = st.session_state['val_col']
 group_col = st.session_state['group_col']
 decomposed_result = st.session_state['decomposed_val']
 
-# df_b = pd.DataFrame(df_tmp)
-# df_b.index = df[date_col]
-# df_b.index = pd.DatetimeIndex(df_b.index)
 df_ad['year'] = df_ad.index.year
 df_ad['month'] = df_ad.index.month
 df_ad['quarter'] = df_ad.index.quarter
@@ -61,20 +45,20 @@ def color_survived(val):
     color = 'rgb(238, 249, 239)' if val > 0 else 'rgb(253, 238, 237)'
     return f'background-color: {color}'
 
+# YoY outcome
 st.markdown("<h5 style='text-align: left; color: rgb(0, 0, 0);'> Year on Year Growth </h5>", unsafe_allow_html=True)
 year_df = df_ad.groupby('year').agg({val_col:sum})
 year_df['lag'] = year_df[val_col].shift(1)
 year_df['YoY growth'] = ((year_df[val_col] - year_df.lag) / year_df.lag) * 100
 year_df.dropna(inplace=True)
-# st.write(year_df)
 year_df['YoY growth'] = [int(item) for item in year_df['YoY growth']]
 year_output = year_df[['YoY growth']]
 year_output = year_output
 y_out = year_output.transpose().style.applymap(color_survived)
 st.dataframe(y_out, use_container_width=True)
-
 st.bar_chart(year_output)
 
+# QoQ outcome
 st.markdown("<h5 style='text-align: left; color: rgb(0, 0, 0);'> Quarter on Quarter Growth </h5>", unsafe_allow_html=True)
 quarter_df = df_ad.groupby(['year','quarter']).agg({val_col:sum})
 quarter_df['lag'] = quarter_df[val_col].shift(1)
@@ -94,13 +78,13 @@ quarter_df3 = quarter_df3.drop(['year', 'quarter'], axis=1)
 quarter_df3.index = index_list
 st.bar_chart(quarter_df3)
 
+# MoM outcome
 st.markdown("<h5 style='text-align: left; color: rgb(0, 0, 0);'> Month on Month Growth </h5>", unsafe_allow_html=True)
 month_df = df_ad.groupby(['year','month']).agg({val_col:sum})
 month_df['lag'] = month_df[val_col].shift(1)
 month_df['MoM growth'] = ((month_df[val_col] - month_df.lag) / month_df.lag) * 100
 month_df.dropna(inplace=True)
 month_df['MoM growth'] = [int(item) for item in month_df['MoM growth']]
-# month_df.fillna('na', inplace=True)
 month_df = month_df[['MoM growth']]
 month_output = month_df[0:]
 m_out = month_output.transpose().style.applymap(color_survived)

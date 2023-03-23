@@ -1,28 +1,13 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
-from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 from statsmodels.tsa.seasonal import seasonal_decompose
-from statsmodels.tsa.stattools import adfuller
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
-import statsmodels.stats.diagnostic as diag
-from scipy.stats import kendalltau
-from streamlit_lottie import st_lottie
-import requests
-import matplotlib.pyplot as plt
-from matplotlib import rcParams
-from PIL import Image
 
-
-import warnings
-warnings.filterwarnings("ignore")
-
-############################################## Title ##############################################
-
+# Title
 st.markdown("<h1 style='text-align: center; color: rgb(0, 0, 0);'> Time Series Decomposition </h1>", unsafe_allow_html=True)
 st.markdown('----')
 
-############################################## Body ##############################################
+# Body
 df_ad = st.session_state['my_data3']
 val_col = st.session_state['val_col']
 group_col = st.session_state['group_col']
